@@ -1,0 +1,66 @@
+---
+- hosts : all
+  
+  vars:
+      http_port: 80
+  tasks:
+        - name: test on port 80
+          ping:
+
+        - name: ensure apache is installed
+          apt:
+                  name: apache2
+                  state: present
+          become: yes
+          become_method: sudo
+  
+        
+        - name: ensure php is installed
+          apt:
+                    name: php
+                    state: present
+          become: yes
+          become_method: sudo
+  
+        
+        - name: start the server
+          service:
+                        name: apache2
+                        state: started
+                        enabled: yes
+          become: yes
+          become_method: sudo
+   #       vars:
+    #              ansible_sudo_pass: pooja
+        
+        - name: start the php
+          service:
+                        name: apache2
+                        state: started
+                        enabled: yes
+          become: yes
+          become_method: sudo
+       #   vars:
+        #          ansible_sudo_pass: pooja
+        
+        - name: making directory
+          file:
+                        state: directory
+                        path: /var/www/html
+                        mode: 0777
+          become: yes
+          become_method: sudo
+
+        - name: deploying web page
+          copy:
+                        src: hello.html.j2 
+                        dest: /var/www/html/hello.html
+          notify: restart apache2
+
+  handlers:
+         - name: restart apache2
+           service:
+                   name: apache2
+                   state: restarted
+          
+
