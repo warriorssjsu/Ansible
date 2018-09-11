@@ -1,0 +1,21 @@
+---
+- hosts : webservers
+
+  tasks:
+        - name: ensure apache is uninstalled
+          apt:
+                  name: apache2
+                  state: absent
+          become: yes
+          become_method: sudo
+  
+        
+        - name: ensure php is uninstalled
+          apt:
+                    name: php
+                    state: absent
+          become: yes
+          become_method: sudo
+  
+        
+
