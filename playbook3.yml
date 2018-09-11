@@ -1,5 +1,5 @@
 ---
-- hosts : all
+- hosts : webservers
   
   vars:
       http_port: 80
@@ -30,19 +30,7 @@
                         enabled: yes
           become: yes
           become_method: sudo
-   #       vars:
-    #              ansible_sudo_pass: pooja
-        
-        - name: start the php
-          service:
-                        name: apache2
-                        state: started
-                        enabled: yes
-          become: yes
-          become_method: sudo
-       #   vars:
-        #          ansible_sudo_pass: pooja
-        
+            
         - name: making directory
           file:
                         state: directory
@@ -53,7 +41,7 @@
 
         - name: deploying web page
           copy:
-                        src: hello.html.j2 
+                        src: hello.html
                         dest: /var/www/html/hello.html
           notify: restart apache2
 
@@ -63,4 +51,6 @@
                    name: apache2
                    state: restarted
           
+           become: yes
+           become_method: sudo
 

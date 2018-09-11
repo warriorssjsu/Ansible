@@ -1,7 +1,0 @@
----
-- hosts : all
-  order: sorted
-  gather_facts: False
-  tasks:
-      - debug: 
-          var: inventory

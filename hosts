@@ -14,7 +14,6 @@
 ## blue.example.com
 ## 192.168.100.1
 ## 192.168.100.10
-18.222.189.127 ansible_user=ubuntu
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
 
@@ -23,6 +22,8 @@
 ## beta.example.org
 ## 192.168.1.100
 ## 192.168.1.110
+[webservers]
+52.15.83.165
 
 # If you have multiple hosts following a pattern you can specify
 # them like this:
